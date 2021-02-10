@@ -11,6 +11,12 @@ namespace app.Controllers
 {
     public class HomeController : Controller
     {
+        public static Double FibonacciSeries(Double n)
+        {
+            if (n == 0) return 0;
+            if (n == 1) return 1; 
+            return FibonacciSeries(n - 1) + FibonacciSeries(n - 2);
+        }
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -20,6 +26,10 @@ namespace app.Controllers
 
         public IActionResult Index()
         {
+            foreach (var item in GetFibonacciSeries(double.MaxValue).AsParallel())
+            {
+                logger.LogInformation(item);
+            }
             return View();
         }
 
