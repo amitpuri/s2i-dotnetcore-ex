@@ -11,7 +11,7 @@ namespace app.Controllers
 {
     public class HomeController : Controller
     {
-        public Double FibonacciSeries(Double n)
+        private Double FibonacciSeries(Double n)
         {
             if (n == 0) return 0;
             if (n == 1) return 1; 
@@ -38,7 +38,7 @@ namespace app.Controllers
         {
             foreach (var item in GetFibonacciSeries(double.MaxValue).AsParallel())
             {
-                _logger.LogInformation(item);
+                _logger.LogInformation("Iterating..");
             }
             return View();
         }
