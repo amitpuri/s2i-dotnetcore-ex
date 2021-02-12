@@ -36,10 +36,7 @@ namespace app.Controllers
 
         public IActionResult Index()
         {
-            foreach (var item in GetFibonacciSeries(double.MaxValue).AsParallel())
-            {
-                _logger.LogInformation("Iterating..");
-            }
+           
             return View();
         }
 
@@ -52,6 +49,17 @@ namespace app.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpPost("[action]")]
+        [Route("/Home")]
+        public IActionResult Home()
+        {
+            foreach (var item in GetFibonacciSeries(double.MaxValue).AsParallel())
+            {
+                _logger.LogInformation("Iterating..");
+            }
+            return View();
         }
     }
 }
